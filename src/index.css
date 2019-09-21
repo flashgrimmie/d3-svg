@@ -1,0 +1,8 @@
+.mdc-toolbar {
+  background-color: #fff !important;
+  box-shadow: none !important;
+}
+
+.mdc-toolbar__row {
+  box-shadow: 0px 1px #e0e0e0;
+}
