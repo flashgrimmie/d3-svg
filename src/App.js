@@ -13,7 +13,7 @@ class App extends Component {
     super(props);
     this.state = {
       index: "Theme001",
-      value: 180,
+      value: 0,
       themes: {
         Theme001: {
           tint001: "#03A9F4",
@@ -87,7 +87,14 @@ class App extends Component {
         let tint003_color = this.state.themes[this.state.index].tint003;
         let tint004_color = this.state.themes[this.state.index].tint004;
         let tint005_color = this.state.themes[this.state.index].tint005;
-        let svgs = document.querySelectorAll(".svg");
+
+        d3.select('svg').selectAll('#tint001').attr('fill', tint001_color)
+        d3.select('svg').selectAll('#tint002').attr('fill', tint002_color)
+        d3.select('svg').selectAll('#tint003').attr('fill', tint003_color)
+        d3.select('svg').selectAll('#tint004').attr('fill', tint004_color)
+        d3.select('svg').selectAll('#tint005').attr('fill', tint005_color)
+
+        /*let svgs = document.querySelectorAll(".svg");
         svgs.forEach(svg => {
           let tint001_paths = svg.getSVGDocument().querySelectorAll("#tint001");
           tint001_paths.forEach(path => {
@@ -109,21 +116,43 @@ class App extends Component {
           tint005_paths.forEach(path => {
             path.setAttribute("fill", tint005_color);
           });
-        });
+        });*/
       }
     );
+  }
+
+  componentDidMount() {
+    d3.xml('./img/New_A_001.svg')
+    .then(data => {
+        d3.select('div#mGridCell').node().append(data.documentElement)
+    })
+
+    /*d3.xml("./img/New_A_001.svg", function(xml) {
+      var importedNode = document.importNode(xml.documentElement, true);
+      console.log("asdfasdf", importedNode)
+      d3.select("div#mGridCell")
+        .each(function() {
+          this.appendChild(importedNode);
+        })
+      });*/
   }
 
   onSlider(e) {
     this.setState({value: e})
 
+    let mSVG = d3.select('svg')
+
+    mSVG.select('.tint001')
+      .attr('transform', "rotate(" + e + " 340 120)")
+
+/*
     let svgs = document.querySelectorAll(".svg");
     svgs.forEach(svg => {
       let tint001_paths = svg.getSVGDocument().querySelectorAll(".tint001");
       tint001_paths.forEach(path => {
         path.setAttribute("transform", "rotate(" + e + " 340 120)");
       });
-    })
+    })*/
   }
 
   render() {
@@ -153,13 +182,13 @@ class App extends Component {
           </Toolbar>
           <Grid />
           <br />
-          <GridCell span="3">
-            <object
+          <GridCell id="mGridCell" span="3">
+            {/*<object
               className="svg"
               data="./img/New_A_001.svg"
               type="image/svg+xml"
               aria-label="svg"
-            />
+            />*/}
           </GridCell>
         </div>
         <Slider
