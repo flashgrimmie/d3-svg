@@ -8,6 +8,36 @@ import { Slider } from "rmwc/Slider";
 import '@material/slider/dist/mdc.slider.css';
 import * as d3 from 'd3';
 
+  d3.selection.prototype.position = function() {
+
+    var el = this.node();
+    var elPos = el.getBoundingClientRect();
+    var vpPos = getVpPos(el);
+
+    function getVpPos(el) {
+        if(el.parentElement.tagName === 'svg') {
+            return el.parentElement.getBoundingClientRect();
+        }
+        return getVpPos(el.parentElement);
+    }
+    /*
+    function getVpPos(el) {
+        if(el.parentNode.nodeName === 'svg') {
+            return el.parentNode.getBoundingClientRect();
+        }
+        return getVpPos(el.parentNode);
+    }*/
+
+    return {
+        top: elPos.top - vpPos.top / 2 - 10,
+        left: elPos.left - vpPos.left / 2 - 10,
+        width: elPos.width,
+        bottom: elPos.bottom - vpPos.top,
+        height: elPos.height,
+        right: elPos.right - vpPos.left
+    };
+  };
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +45,7 @@ class App extends Component {
       index: "Theme001",
       value: 0,
       opacityValue: 100,
+      pos: '',
       themes: {
         Theme001: {
           tint001: "#03A9F4",
@@ -137,14 +168,18 @@ class App extends Component {
         })
       });*/
   }
-
+  
   onSlider(e) {
     this.setState({value: e})
 
     let mSVG = d3.select('svg')
 
+    if (this.state.pos == '') {
+      this.setState({pos: mSVG.select('.tint001').position()})
+    }
+
     mSVG.select('.tint001')
-      .attr('transform', "rotate(" + e + " 270 130)")
+      .attr('transform', "rotate(" + e + " " + this.state.pos.left + " " + this.state.pos.top + ")")
       //.attr('transform', "rotate(" + e + " 340 120)")
 
 /*
