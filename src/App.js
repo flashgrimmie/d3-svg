@@ -14,23 +14,23 @@ import * as d3 from 'd3';
     var elPos = el.getBoundingClientRect();
     var vpPos = getVpPos(el);
 
-    function getVpPos(el) {
+    /*function getVpPos(el) {
         if(el.parentElement.tagName === 'svg') {
             return el.parentElement.getBoundingClientRect();
         }
         return getVpPos(el.parentElement);
     }
-    /*
+    */
     function getVpPos(el) {
         if(el.parentNode.nodeName === 'svg') {
             return el.parentNode.getBoundingClientRect();
         }
         return getVpPos(el.parentNode);
-    }*/
+    }
 
     return {
-        top: elPos.top - vpPos.top / 2 - 10,
-        left: elPos.left - vpPos.left / 2 - 10,
+        top: elPos.top - vpPos.top,
+        left: elPos.left - vpPos.left,
         width: elPos.width,
         bottom: elPos.bottom - vpPos.top,
         height: elPos.height,
@@ -176,10 +176,20 @@ class App extends Component {
 
     if (this.state.pos == '') {
       this.setState({pos: mSVG.select('.tint001').position()})
+
+      // mSVG.select(".tint001")
+      // .attr('x',function(d,i){
+      //     // get x coord
+      //     console.log(this.getBBox().x, 'or', d3.select(this).attr('x'))
+      // })
+      // .attr('y',function(d,i){
+      //     // get y coord
+      //     console.log(this.getBBox().y)
+      // })
     }
 
     mSVG.select('.tint001')
-      .attr('transform', "rotate(" + e + " " + this.state.pos.left + " " + this.state.pos.top + ")")
+      .attr('transform', "rotate(" + e + " " + this.state.pos.left + " " + this.state.pos.bottom + ")")
       //.attr('transform', "rotate(" + e + " 340 120)")
 
 /*
