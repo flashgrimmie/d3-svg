@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e6f11e80c919e29e79c73571760d43f6",
+    "revision": "d95cee3b5316fe02e06f1d60983e4d25",
     "url": "/react-d3-svg-management/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-d3-svg-management/static/css/2.97262ed7.chunk.css"
   },
   {
-    "revision": "b785baf069c6481f15ff",
+    "revision": "0e90e536d2fba5107e95",
     "url": "/react-d3-svg-management/static/css/main.14b6a1ca.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-d3-svg-management/static/js/2.ab26cc5f.chunk.js"
   },
   {
-    "revision": "b785baf069c6481f15ff",
-    "url": "/react-d3-svg-management/static/js/main.50a404ca.chunk.js"
+    "revision": "0e90e536d2fba5107e95",
+    "url": "/react-d3-svg-management/static/js/main.e7c243b9.chunk.js"
   },
   {
     "revision": "4436d728c2b5a4631583",
