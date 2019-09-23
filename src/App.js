@@ -14,6 +14,7 @@ class App extends Component {
     this.state = {
       index: "Theme001",
       value: 0,
+      opacityValue: 100,
       themes: {
         Theme001: {
           tint001: "#03A9F4",
@@ -143,7 +144,8 @@ class App extends Component {
     let mSVG = d3.select('svg')
 
     mSVG.select('.tint001')
-      .attr('transform', "rotate(" + e + " 340 120)")
+      .attr('transform', "rotate(" + e + " 270 130)")
+      //.attr('transform', "rotate(" + e + " 340 120)")
 
 /*
     let svgs = document.querySelectorAll(".svg");
@@ -153,6 +155,15 @@ class App extends Component {
         path.setAttribute("transform", "rotate(" + e + " 340 120)");
       });
     })*/
+  }
+
+  onOpacitySlider(e){
+    this.setState({opacityValue: e})
+
+    let mSVG = d3.select('svg')
+
+    mSVG.select('.tint001')
+      .attr('opacity', e/100)
   }
 
   render() {
@@ -198,6 +209,14 @@ class App extends Component {
             discrete
             step={1}
             max={360}
+          />
+        <Slider
+            value={this.state.opacityValue}
+            onChange={evt2 => this.onOpacitySlider(evt2.detail.value)}
+            onInput={evt2 => this.onOpacitySlider(evt2.detail.value)}
+            discrete
+            step={1}
+            max={100}
           />
       </div>
     );
